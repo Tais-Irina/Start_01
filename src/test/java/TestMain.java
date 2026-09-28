@@ -17,9 +17,9 @@ public class TestMain {
         return (n >= 0) ? true : false;
     }
 
-    //Разработать метод, который возвращает Allowed, если age больше или равно 18, иначе — Denied
+    //Разработать метод, который возвращает Allowed, если age больше 18, иначе — Denied
     public static String checkAccess(int age) {
-        return (age >= 18) ? "Allowed" : "Denied";
+        return (age > 18) ? "Allowed" : "Denied";
     }
 
     //Разработать метод, который преобразует баллы (0–100) в символ оценки:
@@ -31,7 +31,7 @@ public class TestMain {
                         (score >= 41) && (score <= 60) ? "C" :
                                 (score >= 61) && (score <= 80) ? "B" :
                                         (score >= 81) && (score <= 100) ? "A" :
-                                                "Такого бала не бывает";
+                                                "Error";
         return grade;
     }
 
@@ -73,7 +73,9 @@ public class TestMain {
 
     //Разработать метод, который принимает границы диапазона и возвращает строку,
     // состоящую только из чётных чисел внутри этого промежутка
-    public static String getEvenInRange(int start, int end) {
+    public static String getEvenInRange(int start, int end
+
+    ) {
         String str = "";
         //проверить, если start>end - выйти и вернуть пустую строку
         if (start > end) {
@@ -97,6 +99,8 @@ public class TestMain {
                     if ((element <= end)) {
                         str = str + " ";
                     }
+                }else {//если элемент не четный,
+                    element++;
                 }
             }
             return str;
@@ -133,9 +137,9 @@ public class TestMain {
 
     //Разработать метод, который вычисляет и возвращает
     //среднее арифметическое всех чисел в списке
-    public static int calcAverage(List<Integer> list)
+    public static double calcAverage(List<Integer> list)
     {
-        int aver =0;
+        double aver =0;
         for (int l : list){
             aver = aver + l;
         }
@@ -162,6 +166,7 @@ public class TestMain {
         List<String> list = List.of("желтый","красный","синий","зеленый","синий");
         List<String> rl = new ArrayList<>( removeSpecificName(list, "синий"));
         System.out.println("Result of method removeSpecificName(list) is " + rl.get(0) +" "+ rl.get(1)+" " + rl.get(2) );
+        System.out.println("getEvenInRange(int start, int end " + getEvenInRange(1,7));
     }
 }
 

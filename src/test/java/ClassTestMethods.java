@@ -42,8 +42,8 @@ public class ClassTestMethods {
             System.out.println(rev_arr[i]);
         }
 
-        List<Integer> list = List.of(5,3,6,10);
-        int av = TestMain.calcAverage(list);
+        List<Integer> list = List.of(6,3,6,10);
+        double av = TestMain.calcAverage(list);
         System.out.println("Result of method calcAverage(list) is " + av );
 
         List<String> colors = List.of("желтый","красный","синий","зеленый","синий");
