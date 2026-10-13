@@ -1,9 +1,12 @@
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-///
+import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+
+//
 public class TestMain {
 
     //Разработать метод, который возвращает true,если число чётное
@@ -11,7 +14,7 @@ public class TestMain {
         return n % 2 == 0;
     }
 
-    //Разработать метод, который проверяет знак через тернарный оператор: возвращает true, если число
+     //Разработать метод, который проверяет знак через тернарный оператор: возвращает true, если число
     //больше или равно 0, и false, если меньше
     public static boolean isPositive(int n) {
         return (n >= 0) ? true : false;
@@ -73,9 +76,7 @@ public class TestMain {
 
     //Разработать метод, который принимает границы диапазона и возвращает строку,
     // состоящую только из чётных чисел внутри этого промежутка
-    public static String getEvenInRange(int start, int end
-
-    ) {
+    public static String getEvenInRange(int start, int end) {
         String str = "";
         //проверить, если start>end - выйти и вернуть пустую строку
         if (start > end) {
@@ -161,12 +162,10 @@ public class TestMain {
         return removelist;
     }
 
-    @Test
-    void test() {
-        List<String> list = List.of("желтый","красный","синий","зеленый","синий");
-        List<String> rl = new ArrayList<>( removeSpecificName(list, "синий"));
-        System.out.println("Result of method removeSpecificName(list) is " + rl.get(0) +" "+ rl.get(1)+" " + rl.get(2) );
-        System.out.println("getEvenInRange(int start, int end " + getEvenInRange(1,7));
+    public static int pluss(int a, int b){
+        return a+b;
     }
+
+
 }
 
