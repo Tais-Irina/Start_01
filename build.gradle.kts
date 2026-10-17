@@ -20,6 +20,10 @@ dependencies {
     implementation("org.apache.commons:commons-lang3:3.20.0")
 // Source: https://mvnrepository.com/artifact/com.google.guava/guava
     implementation("com.google.guava:guava:33.7.2-android")
+    // Source: https://mvnrepository.com/artifact/org.assertj/assertj-core
+    testImplementation("org.assertj:assertj-core:3.27.7")
+    // Source: https://mvnrepository.com/artifact/org.awaitility/awaitility
+    testImplementation("org.awaitility:awaitility:4.3.0")
 }
 
 
