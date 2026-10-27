@@ -24,6 +24,10 @@ dependencies {
     testImplementation("org.assertj:assertj-core:3.27.7")
     // Source: https://mvnrepository.com/artifact/org.awaitility/awaitility
     testImplementation("org.awaitility:awaitility:4.3.0")
+    // Source: https://mvnrepository.com/artifact/io.rest-assured/rest-assured
+    implementation("io.rest-assured:rest-assured:6.0.1")
+    // Source: https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.22.3")
 }
 
 
@@ -40,6 +44,7 @@ tasks.register<Test>("smokeTest"){
         includeTags("Smoke")
     }
 }
+
 //Задача 2. Запускает Задачу №1 и после прогонов пишет в консоль "Test run is over"
 tasks.register("printOver"){
     description = "Prints Test run is over"
@@ -56,6 +61,14 @@ tasks.named("printOver")
 }
 
 
+//Задача запускает APITest //APIGoods
+tasks.register<Test>("taskAPIGoodsTest"){
+    description = "Run API goods Tests"
+    group="Test"
+    useJUnitPlatform{
+        includeTags("APIGoods")
+    }
+}
 
 
 
