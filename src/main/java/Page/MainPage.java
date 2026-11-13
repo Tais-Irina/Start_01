@@ -107,7 +107,7 @@ public class MainPage {
     @FindBy(xpath = "//div[@class='modal-content']" )
     private SelenideElement basketWidget;
 
-    //товары в виджте корзины
+    //товары в виджете корзины
     @FindBy(xpath = "//div[@class='cart-item' and @id='cart-item-67']")
     private SelenideElement cartItem1;
 

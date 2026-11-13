@@ -17,8 +17,6 @@ import static org.hamcrest.Matchers.*;
 //Часть первая
 public class testRestAssured {
 
-
-
     //Метод 1, который делает запрос к эндпоинту GET /goods/list учебного API:
     //Метод с использованием инструкций given(), when(), then() — проверить:
     //код ответа;
@@ -44,6 +42,7 @@ public class testRestAssured {
     //код ответа;
     //что тело ответа пустое;
 
+    //запрос
     private RequestSpecification basicRQ = new RequestSpecBuilder()
             .setBaseUri("http://localhost:8080")
             .setBasePath("/goods")
@@ -77,7 +76,7 @@ public class testRestAssured {
         Integer nameRandom = random.nextInt(1000,9999);
         String name = "butter"+nameRandom.toString();
 
-        //Рандомная цена
+        //Рандомная цена не более 100
         Double price = random.nextInt(1, 10000)/100.0;
         //тело-запроса для post
         RequestBody reqBody = new RequestBody(name, price);

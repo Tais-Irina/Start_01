@@ -39,91 +39,129 @@ public class SeleniumTests {
     //1.1. Добавить товар через админку, выйти на витрину и проверить, что товар отображается.
     @Test
     void SeleniumTest11() throws InterruptedException {
+        //нажать кнопку Админконсоль
         this.driver.findElement(By.xpath("//*[@class='btn-outline']")).click();
         Thread.sleep(1000L);
-        this.driver.findElement(By.xpath("//*[@name='username']")).sendKeys(new CharSequence[]{this.userName});
+        //Ввести логин
+        this.driver.findElement(By.xpath("//*[@name='username']")).sendKeys(userName);
         Thread.sleep(1000L);
-        this.driver.findElement(By.xpath("//*[@id='password']")).sendKeys(new CharSequence[]{this.password});
+        //Ввести пароль
+        this.driver.findElement(By.xpath("//*[@id='password']")).sendKeys(password);
         Thread.sleep(1000L);
+        //нажать sign in
         this.driver.findElement(By.xpath("//*[@type='submit']")).click();
         Thread.sleep(1000L);
-        this.driver.findElement(By.xpath("//*[@id='n-name']")).sendKeys(new CharSequence[]{this.goodName});
+        //ввести наименование товара
+        this.driver.findElement(By.xpath("//*[@id='n-name']")).sendKeys(goodName);
         Thread.sleep(1000L);
-        this.driver.findElement(By.xpath("//*[@id='n-price']")).sendKeys(new CharSequence[]{this.price});
+        //ввести цену товара
+        this.driver.findElement(By.xpath("//*[@id='n-price']")).sendKeys(price);
         Thread.sleep(1000L);
+        //Нажать Создать
         this.driver.findElement(By.xpath("//*[@id='add-btn']")).click();
         Thread.sleep(1000L);
+        //Нажать на "Вернуться на сайт
         this.driver.findElement(By.xpath("//*[@href='/']")).click();
         Thread.sleep(1000L);
-        String str = String.format("//*[@data-name='%s'][@data-price='%s'][@class='product-card']", this.goodName, this.price);
-        ((ObjectAssert)Assertions.assertThat(this.driver.findElement(By.xpath(str))).as(String.format("Карточка товара [%s] должна быть на странице", this.goodName), new Object[0])).isNotNull();
+        // Проверка наличия карточки товара на странице
+        String str = String.format("//*[@data-name='%s'][@data-price='%s'][@class='product-card']", goodName, price);
+        Assertions
+                .assertThat(driver.findElement(By.xpath(str)))
+                .as(String.format("Карточка товара [%s] должна быть на странице", goodName))
+                .isNotNull();
     }
 
     //1.2. Добавить товар в корзину и проверить, что он отображается.
     @Test
     void SeleniumTest12() throws InterruptedException {
-        String str = String.format("//*[@data-action='add-to-cart'][@data-name='%s']", this.goodName);
-        this.driver.findElement(By.xpath(str)).click();
+        //Нажать на кнопку добавления товара  goodName в корзину
+        String str = String.format("//*[@data-action='add-to-cart'][@data-name='%s']", goodName);
+        driver.findElement(By.xpath(str)).click();
         Thread.sleep(1000L);
-        this.driver.findElement(By.xpath("//*[@id='open-cart-btn']")).click();
+        //Нажать на кнопку корзина
+        driver.findElement(By.xpath("//*[@id='open-cart-btn']")).click();
         Thread.sleep(1000L);
-        String text = ((WebElement)this.driver.findElements(By.xpath("//*[@class='cart-item']")).getLast()).getText();
+        //Найти в списке товаров в корзине последний добавленный и проверить, что это goodName
+        String text = driver.findElements(By.xpath("//*[@class='cart-item']")).getLast().getText();
         Thread.sleep(1000L);
-        ((AbstractStringAssert)Assertions.assertThat(text).as(String.format("В корзину должен быть добавлен товар [%s]", this.goodName), new Object[0])).contains(new CharSequence[]{this.goodName});
+        Assertions
+                .assertThat(text)
+                .as(String.format("В корзину должен быть добавлен товар [%s]", goodName))
+                .contains(goodName);
     }
 
     //1.3. Попытаться войти в админку с неверным логином и паролем.
     @Test
     void SeleniumTest13() throws InterruptedException {
-        this.driver.findElement(By.xpath("//*[@class='btn-outline']")).click();
+        //Нажать кнопку Администрирование
+        driver.findElement(By.xpath("//*[@class='btn-outline']")).click();
         Thread.sleep(1000L);
-        this.driver.findElement(By.xpath("//*[@name='username']")).sendKeys(new CharSequence[]{"userName"});
+        //заполнить логин не верным логином
+        driver.findElement(By.xpath("//*[@name='username']")).sendKeys("userName");
         Thread.sleep(1000L);
-        this.driver.findElement(By.xpath("//*[@id='password']")).sendKeys(new CharSequence[]{"password"});
+        //запольнить парль не верным паролем
+        driver.findElement(By.xpath("//*[@id='password']")).sendKeys("password");
         Thread.sleep(1000L);
-        this.driver.findElement(By.xpath("//*[@type='submit']")).click();
+        //Нажать кнопку залогиниться
+        driver.findElement(By.xpath("//*[@type='submit']")).click();
         Thread.sleep(1000L);
-        String text = this.driver.findElement(By.xpath("//*[@class='alert alert-danger']")).getText();
-        ((AbstractStringAssert)Assertions.assertThat(text).as("Должно быть сообщение: 'Неверные учетные данные пользователя'", new Object[0])).isEqualTo("Неверные учетные данные пользователя");
+        //Найти сообщение о неверных учетных данных
+        String text = driver.findElement(By.xpath("//*[@class='alert alert-danger']")).getText();
+        Assertions.assertThat(text)
+                .as("Должно быть сообщение: 'Неверные учетные данные пользователя'")
+                .isEqualTo("Неверные учетные данные пользователя");
     }
 
     //1.4. Проверить сохранение товаров в корзине после обновления страницы.
     @Test
     void SeleniumTest14() throws InterruptedException {
-        this.driver.findElement(By.xpath("//*[@class='btn-outline']")).click();
+        //добавление товара через админку
+        driver.findElement(By.xpath("//*[@class='btn-outline']")).click();
         Thread.sleep(1000L);
-        this.driver.findElement(By.xpath("//*[@name='username']")).sendKeys(new CharSequence[]{this.userName});
+        driver.findElement(By.xpath("//*[@name='username']")).sendKeys(userName);
         Thread.sleep(1000L);
-        this.driver.findElement(By.xpath("//*[@id='password']")).sendKeys(new CharSequence[]{this.password});
+        driver.findElement(By.xpath("//*[@id='password']")).sendKeys(password);
         Thread.sleep(1000L);
-        this.driver.findElement(By.xpath("//*[@type='submit']")).click();
+        driver.findElement(By.xpath("//*[@type='submit']")).click();
         Thread.sleep(1000L);
-        this.driver.findElement(By.xpath("//*[@id='n-name']")).sendKeys(new CharSequence[]{this.goodName});
+        driver.findElement(By.xpath("//*[@id='n-name']")).sendKeys(goodName);
         Thread.sleep(1000L);
-        this.driver.findElement(By.xpath("//*[@id='n-price']")).sendKeys(new CharSequence[]{this.price});
+        driver.findElement(By.xpath("//*[@id='n-price']")).sendKeys(price);
         Thread.sleep(1000L);
-        this.driver.findElement(By.xpath("//*[@id='add-btn']")).click();
+        driver.findElement(By.xpath("//*[@id='add-btn']")).click();
         Thread.sleep(1000L);
-        this.driver.findElement(By.xpath("//*[@href='/']")).click();
+        driver.findElement(By.xpath("//*[@href='/']")).click();
         Thread.sleep(1000L);
-        String str = String.format("//*[@data-action='add-to-cart'][@data-name='%s']", this.goodName);
-        this.driver.findElement(By.xpath(str)).click();
+        //добавить в корзину товар goodName
+        String str = String.format("//*[@data-action='add-to-cart'][@data-name='%s']", goodName);
+        driver.findElement(By.xpath(str)).click();
         Thread.sleep(1000L);
-        this.driver.findElement(By.xpath("//*[@id='open-cart-btn']")).click();
+        //открыть корзину
+        driver.findElement(By.xpath("//*[@id='open-cart-btn']")).click();
         Thread.sleep(1000L);
-        String text = ((WebElement)this.driver.findElements(By.xpath("//*[@class='cart-item']")).getLast()).getText();
-        ((AbstractStringAssert)Assertions.assertThat(text).as(String.format("В корзину должен быть добавлен товар [%s]", this.goodName), new Object[0])).contains(new CharSequence[]{this.goodName});
-        this.driver.findElement(By.xpath("//*[@id='close-modal']")).click();
+        //проверить, что товар есть в корзине
+        String text = driver.findElements(By.xpath("//*[@class='cart-item']")).getLast().getText();
+        Assertions
+                .assertThat(text)
+                .as(String.format("В корзину должен быть добавлен товар [%s]", goodName))
+                .contains(goodName);
+        //Закрыть корзину
+        driver.findElement(By.xpath("//*[@id='close-modal']")).click();
         Thread.sleep(1000L);
-        this.driver.navigate().refresh();
+        //Обновить страницу
+        driver.navigate().refresh();
         Thread.sleep(1000L);
-        this.driver.findElement(By.xpath("//*[@id='open-cart-btn']")).click();
+        //открыть корзину
+        driver.findElement(By.xpath("//*[@id='open-cart-btn']")).click();
         Thread.sleep(1000L);
         new ArrayList();
-        List<WebElement> element = this.driver.findElements(By.xpath("//*[@class='cart-item']"));
-        ((AbstractIntegerAssert)Assertions.assertThat(element.size()).as(String.format("В корзине не должно быть 0 товаров после обновления страницы", this.goodName), new Object[0])).isNotEqualTo(0);
+        //Проверить, что корзина не пустая
+        List<WebElement> element = driver.findElements(By.xpath("//*[@class='cart-item']"));
+        Assertions
+                .assertThat(element.size())
+                .as(String.format("В корзине не должно быть 0 товаров после обновления страницы", goodName))
+                        .isNotEqualTo(0);
     }
-
     @AfterEach
     void tearDown() {
         this.driver.quit();
