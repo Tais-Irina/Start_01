@@ -73,11 +73,11 @@ public class testRestAssured {
     public static RequestBody randomBody(){
         //создаем рандомное имя товара
         Random random = new Random();
-        Integer nameRandom = random.nextInt(1000,9999);
+        Integer nameRandom = random.nextInt(100,1000);
         String name = "butter"+nameRandom.toString();
 
         //Рандомная цена не более 100
-        Double price = random.nextInt(1, 10000)/100.0;
+        Double price = random.nextInt(100, 10000)/100.0;
         //тело-запроса для post
         RequestBody reqBody = new RequestBody(name, price);
         return reqBody;

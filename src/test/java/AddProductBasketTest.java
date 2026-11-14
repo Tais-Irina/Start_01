@@ -19,7 +19,7 @@ public class AddProductBasketTest extends BaseTests{
 
     //Проверяем заголовок страницы
     @Test
-    public void checkTextleText()
+    public void checkTitleText()
     {
         MainPage mainPage = page(MainPage.class);
 

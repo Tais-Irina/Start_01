@@ -2,7 +2,7 @@ plugins {
     id("java")
 }
 
-group = "org.example"
+group = "tais.irina.stady"
 version = "1.0-SNAPSHOT"
 
 repositories {
@@ -32,6 +32,17 @@ dependencies {
     implementation("com.codeborne:selenide:7.18.1")
     // Source: https://mvnrepository.com/artifact/io.rest-assured/rest-assured
     implementation("io.rest-assured:rest-assured:6.2.0")
+    // Source: https://mvnrepository.com/artifact/org.slf4j/slf4j-api
+    implementation("org.slf4j:slf4j-api:2.0.20")
+    // Source: https://mvnrepository.com/artifact/org.projectlombok/lombok
+    compileOnly("org.projectlombok:lombok:1.18.46")
+    testCompileOnly("org.projectlombok:lombok:1.18.46")
+    testAnnotationProcessor("org.projectlombok:lombok:1.18.46")
+
+    // Source: https://mvnrepository.com/artifact/ch.qos.logback/logback-classic
+    runtimeOnly("ch.qos.logback:logback-classic:1.6.5")
+
+
 }
 
 

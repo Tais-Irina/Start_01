@@ -5,6 +5,9 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.impl.CollectionElement;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.openqa.selenium.support.FindBy;
 
 import javax.swing.*;
@@ -18,6 +21,7 @@ import java.util.List;
 //1.4. Цена товара с названием «Стакан» (добавьте через админку).
 //1.5. Список карточек товаров в корзине.
 //1.6. Кнопка корзины.
+
 
 public class MainPage {
 
