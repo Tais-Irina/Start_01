@@ -26,7 +26,7 @@ dependencies {
     testImplementation("org.awaitility:awaitility:4.3.0")
     // Source: https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
     implementation("com.fasterxml.jackson.core:jackson-databind:2.22.3")
-    // Source: https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java
+// Source: https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java
     implementation("org.seleniumhq.selenium:selenium-java:4.52.0")
     // Source: https://mvnrepository.com/artifact/com.codeborne/selenide
     implementation("com.codeborne:selenide:7.18.1")
