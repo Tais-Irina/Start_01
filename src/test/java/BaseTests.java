@@ -1,3 +1,4 @@
+import com.codeborne.selenide.Selenide;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +17,7 @@ public class BaseTests {
 
     Properties prop = new Properties();
     String baseUrl;
-    String browserBinary;
+    //String browserBinary;
     String browser;
     String browserSize;
 
@@ -28,19 +29,14 @@ public class BaseTests {
             throw new RuntimeException(e);
         }
         log.info("Запуск автотестов");
-        //Задаем браузер для Selenide
-        browser = prop.getProperty("browser.name");
-        browserSize = prop.getProperty("browserSize");
         baseUrl = prop.getProperty("base.url");
-        //путь к драйверу
-        browserBinary = prop.getProperty("browserBinary");
         Configuration.timeout = Long.parseLong(prop.getProperty("timeout.global"));
-        open(baseUrl);
+        Selenide.open(baseUrl);
     }
 
     @AfterEach
     public void upDown(){
-        closeWebDriver();
+        Selenide.closeWebDriver();
         log.info("Браузер закрыт!");
     }
 }

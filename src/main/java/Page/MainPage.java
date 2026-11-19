@@ -4,14 +4,13 @@ package Page;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
-import com.codeborne.selenide.impl.CollectionElement;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+
 import org.openqa.selenium.support.FindBy;
 
 import javax.swing.*;
-import java.util.List;
+
+import static com.codeborne.selenide.Selenide.*;
+
 
 //Домашнее задание №5
 //Задача 1: написать локаторы (допускаются и CSS-, и XPath-локаторы) для следующих элементов:
@@ -74,8 +73,7 @@ public class MainPage {
     }
 
     //xpath
-    @FindBy(xpath = "//div[@class='cart-item']")
-    private ElementsCollection goodsInBasket;
+    private ElementsCollection goodsInBasket=$$x("//div[@class='cart-item']");
 
     //css
 //    @FindBy(css="#cart-items .cart-item")
@@ -101,7 +99,6 @@ public class MainPage {
     //копка Корзина css
     @FindBy(css = "#open-cart-btn")
     private SelenideElement btnBusket;
-
 
     //часть надписи на кнопке Корзина с количеством добавленных товаров
     @FindBy(xpath = "//span[@id= 'cart-count']")

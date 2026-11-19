@@ -4,23 +4,44 @@ import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+
 import static io.restassured.RestAssured.given;
 import static io.restassured.filter.log.LogDetail.ALL;
 
 public class RestAPIGoodBuilder {
-    private final String userName = "admin";
-    private final String pass = "secret123";
-    private final String baseUri = "http://localhost:8080";
-    private final String basePath = "/goods";
 
-//билдер запроса
-    RequestSpecification basicRQ = new RequestSpecBuilder()
-            .setBaseUri(baseUri)
-            .setAuth(RestAssured.basic(userName,pass))
-            .setBasePath(basePath)
-            .setContentType(ContentType.JSON)
-            .log(ALL)
-            .build();
+    String configPath = "src/test/resources/config.properties";
+    Properties prop;
+    String userName;
+    String pass;
+    String baseUri;
+    String basePath;
+    //билдер запроса
+    RequestSpecification basicRQ;
+
+    //конструктор
+    public RestAPIGoodBuilder(){
+        prop = new Properties();
+        try {
+            prop.load(new FileInputStream(configPath));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        userName = prop.getProperty("user.name");
+        pass = prop.getProperty("user.password");
+        baseUri = prop.getProperty("base.url");
+        basePath = prop.getProperty("base.path");
+        basicRQ = new RequestSpecBuilder()
+                .setBaseUri(baseUri)
+                .setAuth(RestAssured.basic(userName,pass))
+                .setBasePath(basePath)
+                .setContentType(ContentType.JSON)
+                .log(ALL)
+                .build();
+    }
 
     //шаблон POST add запроса
     public Response post(String endPointPath, Object body){
@@ -46,12 +67,12 @@ public class RestAPIGoodBuilder {
     }
 
     //шаблон DELETE id запроса
-    public Response delete(String endPointPath){
+    public Response delete(Integer endPointPath){
         Response response =
                 given()
                         .spec(basicRQ)
                         .when()
-                        .delete(endPointPath)
+                        .delete("/"+endPointPath.toString())
                         .then().log().all().extract().response();
         return response;
     }

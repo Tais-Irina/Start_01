@@ -170,9 +170,9 @@ public class AutoTestsWithApi {
         //определить id добавленных товаров, чтобы их удалить
         ElementsCollection elements = $$x("//*[@class='product-card']").last(N);
         for(SelenideElement element:elements){
-            String id = element.getAttribute("data-id").toString();
+            String id = element.getAttribute("data-id");
             System.out.println("id добавленного товара: " + id);
-            api.delete(id);
+            api.delete(Integer.parseInt(id));
         }
         sleep(1000);
         //Обновить страницу
@@ -267,7 +267,7 @@ public class AutoTestsWithApi {
         // Удалить товар
         String str = String.format("//*[@data-name='%s'][@class='product-card']",reqBody.name());
         String idDeleted = $x(str).getAttribute("data-id").toString();
-        api.delete(idDeleted);
+        api.delete(Integer.parseInt(idDeleted));
         sleep(1000);
         //Обновить страницу
         refresh();

@@ -104,7 +104,7 @@ public class testGoodsAPIAssert {
         if ( listId.size() !=0){
             Integer id = listId.get(listId.size()-1);
             String endPoint = "/"+id.toString();
-            Response responseDELELEId = api.delete(endPoint);
+            Response responseDELELEId = api.delete(id);
             GoodsAPIAssert.assertThat(responseDELELEId)
                     .statusCodeIsEquals(200);
         } else System.out.println("Нет элементов в списке товаров!");
@@ -127,8 +127,7 @@ public class testGoodsAPIAssert {
                 id = random.nextInt(0,100);
             }
 
-            String endPoint = "/"+id.toString();
-            Response responseDELELEId = api.delete(endPoint);
+            Response responseDELELEId = api.delete(id);
             GoodsAPIAssert.assertThat(responseDELELEId)
                     .statusCodeIsEquals(404);
         } else System.out.println("Нет элементов в списке товаров!");
